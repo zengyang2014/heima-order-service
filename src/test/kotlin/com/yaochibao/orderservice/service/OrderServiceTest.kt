@@ -5,7 +5,7 @@ import com.yaochibao.orderservice.gateway.PaymentClient
 import com.yaochibao.orderservice.gateway.vo.TransactionVo
 import com.yaochibao.orderservice.repository.OrderRepository
 import com.yaochibao.orderservice.repository.entity.OrderEntity
-import com.yaochibao.orderservice.service.dto.AmountAuditError
+import com.yaochibao.orderservice.service.exception.AmountAuditError
 import io.mockk.every
 import io.mockk.mockk
 import org.joda.time.DateTime

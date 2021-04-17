@@ -1,7 +1,7 @@
 package com.yaochibao.orderservice.functiontest
 
 import com.yaochibao.orderservice.constant.OrderStatus
-import com.yaochibao.orderservice.service.OrderDto
+import com.yaochibao.orderservice.service.dto.OrderDto
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 import org.junit.jupiter.api.Assertions.assertEquals

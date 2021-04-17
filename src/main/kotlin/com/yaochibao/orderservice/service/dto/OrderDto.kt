@@ -1,4 +1,4 @@
-package com.yaochibao.orderservice.service
+package com.yaochibao.orderservice.service.dto
 
 import com.yaochibao.orderservice.constant.OrderStatus
 import org.joda.time.DateTime

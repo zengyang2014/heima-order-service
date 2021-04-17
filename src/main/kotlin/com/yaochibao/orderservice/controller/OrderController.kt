@@ -1,6 +1,6 @@
 package com.yaochibao.orderservice.controller
 
-import com.yaochibao.orderservice.service.OrderDto
+import com.yaochibao.orderservice.service.dto.OrderDto
 import com.yaochibao.orderservice.service.OrderService
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping

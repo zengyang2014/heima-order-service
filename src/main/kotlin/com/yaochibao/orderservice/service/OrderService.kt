@@ -3,8 +3,8 @@ package com.yaochibao.orderservice.service
 import com.yaochibao.orderservice.constant.OrderStatus
 import com.yaochibao.orderservice.gateway.PaymentClient
 import com.yaochibao.orderservice.repository.OrderRepository
-import com.yaochibao.orderservice.repository.entity.OrderEntity
-import com.yaochibao.orderservice.service.dto.AmountAuditError
+import com.yaochibao.orderservice.service.exception.AmountAuditError
+import com.yaochibao.orderservice.service.dto.OrderDto
 import org.springframework.stereotype.Service
 import java.util.*
 

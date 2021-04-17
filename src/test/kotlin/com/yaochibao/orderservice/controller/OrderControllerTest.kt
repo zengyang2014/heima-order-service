@@ -2,7 +2,7 @@ package com.yaochibao.orderservice.controller
 
 import com.ninjasquad.springmockk.MockkBean
 import com.yaochibao.orderservice.constant.OrderStatus
-import com.yaochibao.orderservice.service.OrderDto
+import com.yaochibao.orderservice.service.dto.OrderDto
 import com.yaochibao.orderservice.service.OrderService
 import io.mockk.every
 import org.joda.time.DateTime
