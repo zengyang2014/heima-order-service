@@ -23,7 +23,11 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.flywaydb:flyway-core")
+	implementation("joda-time:joda-time:2.10.5")
+	implementation("org.jadira.usertype:usertype.core:7.0.0.CR1")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.10")
 	runtimeOnly("org.postgresql:postgresql")
+	testImplementation("com.h2database:h2:1.4.194")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
