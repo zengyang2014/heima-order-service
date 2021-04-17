@@ -10,3 +10,5 @@ spring:
     locations: classpath:/db/test/migration
   jpa:
     database-platform=org.hibernate.dialect.H2Dialect
+payment:
+  endpoint: http://fake-payment.mocklab.io

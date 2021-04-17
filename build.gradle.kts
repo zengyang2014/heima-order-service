@@ -16,6 +16,12 @@ repositories {
 	mavenCentral()
 }
 
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:2020.0.1")
+	}
+}
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -26,6 +32,7 @@ dependencies {
 	implementation("joda-time:joda-time:2.10.5")
 	implementation("org.jadira.usertype:usertype.core:7.0.0.CR1")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-joda:2.9.10")
+	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("com.h2database:h2:1.4.194")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
