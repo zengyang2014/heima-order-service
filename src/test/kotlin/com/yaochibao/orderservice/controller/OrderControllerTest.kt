@@ -4,6 +4,7 @@ import com.ninjasquad.springmockk.MockkBean
 import com.yaochibao.orderservice.constant.OrderStatus
 import com.yaochibao.orderservice.service.dto.OrderDto
 import com.yaochibao.orderservice.service.OrderService
+import com.yaochibao.orderservice.service.exception.AmountAuditError
 import io.mockk.every
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -54,6 +55,30 @@ internal class OrderControllerTest{
 
         // then
         val expect = """{"orderId":"${orderDto.orderId}","status":"${orderDto.status}","createAt":"${orderDto.createAt}","amount":${orderDto.amount}}"""
+        assertEquals(expect, actual)
+    }
+
+    @Test
+    fun `should return error message when order amount not equal paid money`() {
+        // given
+        val orderId = UUID.randomUUID()
+        val transactionId = "transactionId"
+
+        every { orderService.handlePaymentRequest(any(), any()) } throws AmountAuditError()
+
+        // when
+        val actual = mockMvc.perform(
+            post("/orders/$orderId/payment-request")
+                .header("Authentication", "token")
+                .requestAttr("transactionId", transactionId)
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().is4xxClientError)
+            .andReturn()
+            .response
+            .contentAsString
+
+        // then
+        val expect = "Amount audit error"
         assertEquals(expect, actual)
     }
 }
