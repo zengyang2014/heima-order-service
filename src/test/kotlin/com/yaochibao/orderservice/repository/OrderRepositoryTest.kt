@@ -31,4 +31,31 @@ internal class OrderRepositoryTest {
         val expect = OrderEntity(orderId, orderStatus, amount, createDateTime)
         assertEquals(expect, actual)
     }
+
+    @Test
+    fun `should return order entity when update order status given order id and new status`() {
+        // given
+        val amount = 100.0
+        val status = OrderStatus.WAIT_FOR_PAYMENT
+        val newStatus = OrderStatus.PAID
+        val createDateTime = DateTime("2021-04-17T16:00:00.000")
+        val originalEntity = orderRepository.save(OrderEntity(
+            status = status,
+            amount = amount,
+            createAt = createDateTime
+        ))
+
+        // when
+        val newEntity = originalEntity.copy(status = newStatus)
+        val actual = orderRepository.save(newEntity)
+
+        // then
+        val expect = OrderEntity(
+            originalEntity.id,
+            newStatus,
+            originalEntity.amount,
+            originalEntity.createAt
+        )
+        assertEquals(expect, actual)
+    }
 }
