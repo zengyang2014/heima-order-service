@@ -5,6 +5,7 @@ import com.yaochibao.orderservice.gateway.PaymentClient
 import com.yaochibao.orderservice.gateway.vo.TransactionVo
 import com.yaochibao.orderservice.repository.OrderRepository
 import com.yaochibao.orderservice.repository.entity.OrderEntity
+import com.yaochibao.orderservice.service.dto.AmountAuditError
 import io.mockk.every
 import io.mockk.mockk
 import org.joda.time.DateTime
@@ -38,5 +39,28 @@ internal class OrderServiceTest {
 
         // then
         assertEquals(OrderStatus.PAID, actual.status)
+    }
+
+    @Test
+    fun `should throw error when given transaction amount not equal order amount`() {
+        // given
+        val transactionId = "2"
+        val transaction = TransactionVo(transactionId, 100.0)
+        every { paymentClient.getTransaction(any()) } returns transaction
+
+        val order = OrderEntity(
+            status = OrderStatus.WAIT_FOR_PAYMENT,
+            amount = 200.0,
+            createAt = DateTime.now()
+        )
+        every { repository.findOrderById(any()) } returns order
+
+        // when
+        val actual = assertThrows(AmountAuditError::class.java) {
+            orderService.handlePaymentRequest(transactionId, order.id)
+        }
+
+        // then
+        assertEquals("Amount audit error", actual.message)
     }
 }

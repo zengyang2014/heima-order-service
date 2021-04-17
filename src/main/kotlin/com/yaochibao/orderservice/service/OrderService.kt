@@ -4,6 +4,7 @@ import com.yaochibao.orderservice.constant.OrderStatus
 import com.yaochibao.orderservice.gateway.PaymentClient
 import com.yaochibao.orderservice.repository.OrderRepository
 import com.yaochibao.orderservice.repository.entity.OrderEntity
+import com.yaochibao.orderservice.service.dto.AmountAuditError
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -15,16 +16,12 @@ class OrderService(
     fun handlePaymentRequest(transactionId: String, orderId: UUID): OrderDto {
         val transaction = paymentClient.getTransaction(transactionId)
         val order = orderRepository.findOrderById(orderId)
-        var updatedOrder: OrderEntity
-        var orderDto: OrderDto
 
         if (transaction.amount == order.amount) {
-            updatedOrder = orderRepository.save(order.copy(status = OrderStatus.PAID))
-            orderDto = OrderDto(updatedOrder.id, updatedOrder.status, updatedOrder.createAt, updatedOrder.amount)
-        } else {
-            orderDto = OrderDto(order.id, order.status, order.createAt, order.amount)
+            val updatedOrder = orderRepository.save(order.copy(status = OrderStatus.PAID))
+            return OrderDto(updatedOrder.id, updatedOrder.status, updatedOrder.createAt, updatedOrder.amount)
         }
 
-        return orderDto
+        throw AmountAuditError()
     }
 }
