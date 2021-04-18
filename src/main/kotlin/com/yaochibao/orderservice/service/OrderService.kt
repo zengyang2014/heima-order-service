@@ -12,8 +12,8 @@ import java.util.*
 class OrderService(
     private val orderRepository: OrderRepository,
     private val paymentClient: PaymentClient
-) {
-    fun handlePaymentRequest(transactionId: String, orderId: UUID): OrderDto {
+): OrderServiceInterface {
+    override fun handlePaymentRequest(transactionId: String, orderId: UUID): OrderDto {
         val transaction = paymentClient.getTransaction(transactionId)
         val order = orderRepository.findOrderById(orderId)
 

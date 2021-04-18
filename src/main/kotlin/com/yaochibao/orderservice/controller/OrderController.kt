@@ -2,6 +2,7 @@ package com.yaochibao.orderservice.controller
 
 import com.yaochibao.orderservice.service.dto.OrderDto
 import com.yaochibao.orderservice.service.OrderService
+import com.yaochibao.orderservice.service.OrderServiceInterface
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestAttribute
@@ -11,7 +12,7 @@ import java.util.*
 
 @RestController
 @RequestMapping("/orders")
-class OrderController(private val orderService: OrderService) {
+class OrderController(private val orderService: OrderServiceInterface) {
 
     @PostMapping("/{orderId}/payment-request")
     fun handlePaymentRequest(
